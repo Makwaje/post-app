@@ -7,8 +7,6 @@ import ListItem from "./ListItem";
 const SearchBarContainer = tw.div`
 w-full
 relative
-
-
 `;
 
 const Input = tw.input`
@@ -49,6 +47,11 @@ const SearchButton = tw.button`
 const Grid = tw.div`
 grid
 grid-cols-1
+sm:grid-cols-2
+lg:grid-cols-3
+gap-x-10
+gap-y-4
+
 `;
 
 const Flex = tw.div`

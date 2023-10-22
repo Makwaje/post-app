@@ -11,10 +11,6 @@ md:mt-0
 `;
 
 const Box = tw.div`
-flex
-flex-col
-gap-4
-
 max-w-6xl
 min-h-full
 m-auto
@@ -33,6 +29,27 @@ items-center
 //cheap trick
 scale-90
 md:scale-100
+`;
+
+const Grid = tw.div`
+grid
+
+grid-cols-2
+sm:grid-cols-3
+lg:grid-cols-4
+
+
+
+gap-x-4
+sm:gap-x-8
+
+gap-y-8
+
+
+items-center
+justify-center
+self-center
+
 `;
 
 function SearchPage() {
