@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import tw from "twin.macro";
 
 const Input = tw.input`
@@ -59,6 +60,7 @@ md:py-2
 `;
 
 function Auth() {
+  const navigate = useNavigate();
   return (
     <>
       <div className="mt-8 flex flex-col gap-4">
@@ -67,7 +69,10 @@ function Auth() {
       </div>
 
       <div className="mt-8 flex gap-4 ">
-        <StyledButton1 className="hover:bg-amber-400 active:scale-95">
+        <StyledButton1
+          onClick={() => navigate("/home")}
+          className="hover:bg-amber-400 active:scale-95"
+        >
           Login
         </StyledButton1>
         <StyledButton2 className="hover:bg-amber-400 active:scale-95">
