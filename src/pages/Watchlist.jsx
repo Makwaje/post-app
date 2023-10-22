@@ -6,6 +6,9 @@ min-w-full
 mx-auto
 h-screen
 
+mt-[-36px]
+md:mt-0
+
 `;
 
 const Box = tw.div`

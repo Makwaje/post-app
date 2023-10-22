@@ -5,6 +5,8 @@ const AccountContainer = tw.div`
 min-w-full
 mx-auto
 
+mt-[-11px]
+md:mt-0
 `;
 
 const Box = tw.div`

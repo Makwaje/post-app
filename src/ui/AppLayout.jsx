@@ -5,13 +5,13 @@ import NavBar from "./NavBar";
 const AppLayoutContainer = tw.div`
 overflow-scroll
 h-fit
+
 `;
 
 function AppLayout() {
   return (
     <>
       <NavBar />
-
       <AppLayoutContainer>
         <Outlet />
       </AppLayoutContainer>

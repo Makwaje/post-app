@@ -5,6 +5,9 @@ const SearchContainer = tw.div`
 min-w-full
 mx-auto
 h-screen
+
+mt-[-40px]
+md:mt-0
 `;
 
 const Box = tw.div`
