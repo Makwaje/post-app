@@ -32,20 +32,25 @@ function Recommendations() {
     }),
   });
 
-  if (queryResult.at(-1).isLoading)
+  console.log(queryResult);
+
+  if (
+    queryResult.at(-1).isLoading === true ||
+    queryResult.at(-1).isFetched === false
+  )
     return <TbFidgetSpinner size={50} className="m-auto animate-spin" />;
 
   return (
     <>
       {queryResult?.map((q) => (
         <MovieCard
-          Poster={q.data.Poster}
-          title={q.data.Title}
-          year={q.data.Year}
-          rating={q.data.imdbRating}
-          genre={q.data.Genre}
-          id={q.data.imdbID}
-          key={q.data.imdbID}
+          Poster={q.data?.Poster}
+          title={q.data?.Title}
+          year={q.data?.Year}
+          rating={q.data?.imdbRating}
+          genre={q.data?.Genre}
+          id={q.data?.imdbID}
+          key={q.data?.imdbID}
         />
       ))}
     </>
