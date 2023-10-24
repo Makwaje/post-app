@@ -71,7 +71,10 @@ text-red-100
 p-0.5
 font-medium
 tracking-wide
-w-64
+
+border-b-4
+border-amber-500
+
 `;
 
 function LoginAuth() {

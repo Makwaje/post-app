@@ -71,7 +71,9 @@ text-red-100
 p-0.5
 font-medium
 tracking-wide
-w-64
+border-b-4
+border-amber-500
+
 `;
 
 function SignUpAuth() {
@@ -97,10 +99,10 @@ function SignUpAuth() {
           <Input
             type="text"
             placeholder="Username"
-            {...register("username", { required: "Email is required" })}
+            {...register("username", { required: "Username is required" })}
           />
           {errors.username && (
-            <Alert role="alert">{errors.username.username}</Alert>
+            <Alert role="alert">{errors.username.message}</Alert>
           )}
 
           <Input
