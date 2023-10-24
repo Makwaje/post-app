@@ -6,7 +6,7 @@ import {
 } from "react-icons/hi2";
 import { NavLink } from "react-router-dom";
 import tw from "twin.macro";
-import LogoutButton from "../features/Authentication/logoutButton";
+import LogoutButton from "../features/Authentication/LogoutButton";
 
 const NavContainer = tw.nav`
 bg-neutral-200
