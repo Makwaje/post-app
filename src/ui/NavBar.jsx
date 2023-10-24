@@ -1,12 +1,12 @@
 import {
   HiMagnifyingGlass,
   HiMiniHome,
-  HiOutlineArrowRightOnRectangle,
   HiOutlineTag,
   HiOutlineUserCircle,
 } from "react-icons/hi2";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import tw from "twin.macro";
+import LogoutButton from "../features/Authentication/logoutButton";
 
 const NavContainer = tw.nav`
 bg-neutral-200
@@ -91,14 +91,7 @@ function NavBar() {
         </ListItem>
 
         <ListItem>
-          <Link onClick={() => {}}>
-            <StyledNavItem>
-              <span>
-                <HiOutlineArrowRightOnRectangle size={26} />
-              </span>
-              <span>Logout</span>
-            </StyledNavItem>
-          </Link>
+          <LogoutButton />
         </ListItem>
       </StyledList>
     </NavContainer>

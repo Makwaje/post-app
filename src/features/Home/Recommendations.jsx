@@ -32,8 +32,6 @@ function Recommendations() {
     }),
   });
 
-  console.log(queryResult);
-
   if (
     queryResult.at(-1).isLoading === true ||
     queryResult.at(-1).isFetched === false

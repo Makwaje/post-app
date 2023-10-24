@@ -1,5 +1,7 @@
+import { useLocation } from "react-router-dom";
 import tw from "twin.macro";
-import Auth from "../features/Authentication/Auth";
+import LoginAuth from "../features/Authentication/LoginAuth";
+import SignUpAuth from "../features/Authentication/SignUpAuth";
 
 const HomeContainer = tw.div`
 min-w-full
@@ -52,12 +54,14 @@ md:scale-100
 `;
 
 function AuthPage() {
+  const { pathname } = useLocation();
+
   return (
     <HomeContainer>
       <Box>
         <StyledHeading>Movies App</StyledHeading>
         <StyledParagraph>Please sign in or create account</StyledParagraph>
-        <Auth />
+        {pathname === "/login" ? <LoginAuth /> : <SignUpAuth />}
       </Box>
     </HomeContainer>
   );

@@ -3,7 +3,7 @@ import { HiEye } from "react-icons/hi2";
 import { TbFidgetSpinner } from "react-icons/tb";
 import { useParams } from "react-router-dom";
 import tw from "twin.macro";
-import { getMovie } from "../../util/MoviesApi";
+import { getMovie } from "../../services/MoviesApi";
 
 const Box = tw.div`
 

@@ -83,7 +83,7 @@ function LandingPage() {
       <Box>
         <StyledHeading>Movies App</StyledHeading>
         <StyledParagraph>Make sure you don't miss any show!</StyledParagraph>
-        <Link className="" to={"/login"}>
+        <Link to={"/home"}>
           <StyledButton className="hover hover:bg-amber-400 active:scale-95">
             Get Started
           </StyledButton>

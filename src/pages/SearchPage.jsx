@@ -31,27 +31,6 @@ scale-90
 md:scale-100
 `;
 
-const Grid = tw.div`
-grid
-
-grid-cols-2
-sm:grid-cols-3
-lg:grid-cols-4
-
-
-
-gap-x-4
-sm:gap-x-8
-
-gap-y-8
-
-
-items-center
-justify-center
-self-center
-
-`;
-
 function SearchPage() {
   return (
     <SearchContainer>
