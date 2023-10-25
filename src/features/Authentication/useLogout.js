@@ -11,7 +11,9 @@ export function useLogout() {
     mutationKey: ["user"],
 
     onSettled: () => {
-      toast.success("You've been logged out successfully, comeback later! :)");
+      toast.success("You've been logged out successfully");
+      toast("comeback later! :)");
+
       navigate("/login");
     },
   });

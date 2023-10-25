@@ -1,9 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
-import { HiEye } from "react-icons/hi2";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-hot-toast";
+import { HiEye, HiMiniCheckCircle } from "react-icons/hi2";
 import { TbFidgetSpinner } from "react-icons/tb";
 import { useParams } from "react-router-dom";
 import tw from "twin.macro";
+import { addWatchlist } from "../../services/ApiAuth";
 import { getMovie } from "../../services/MoviesApi";
+import { useWatchlist } from "../Watchlist/useWatchlist";
 
 const Box = tw.div`
 
@@ -87,14 +90,30 @@ const HeadingStyle = tw.h1`
 
 function MovieDetails() {
   const { id } = useParams("id");
+  const queryClient = useQueryClient();
+  const { data: watchlist = [] } = useWatchlist();
 
   const { data = {}, isLoading } = useQuery({
     queryFn: () => getMovie(id),
     queryKey: ["movie-details", id],
   });
 
-  console.log(data);
+  const { mutate: addMovie, isLoading: isAdding } = useMutation({
+    mutationFn: addWatchlist,
+    mutationKey: ["watchlist"],
 
+    onSuccess: () => {
+      toast.success("Movie added successfully");
+      queryClient.invalidateQueries({ queryKey: ["watchlist"] });
+    },
+  });
+
+  function handleClick(id) {
+    addMovie(id);
+  }
+
+  const isAddedToWatchlist = watchlist.includes(id);
+  console.log(isAddedToWatchlist);
   return (
     <>
       {isLoading && (
@@ -126,9 +145,19 @@ function MovieDetails() {
 
       <Box>
         <Flex>
-          <button className="rounded-md bg-amber-500 p-2">
+          <button
+            onClick={() => handleClick(id)}
+            disabled={isLoading}
+            className="rounded-md bg-amber-500 p-2"
+          >
             <Flex>
-              <HiEye size={48} />
+              {isAdding ? (
+                <TbFidgetSpinner size={50} className="m-auto animate-spin" />
+              ) : isAddedToWatchlist ? (
+                <HiMiniCheckCircle size={48} />
+              ) : (
+                <HiEye size={48} />
+              )}
               <HeadingStyle>Add to watchlist</HeadingStyle>
             </Flex>
           </button>

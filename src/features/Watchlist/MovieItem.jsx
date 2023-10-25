@@ -1,10 +1,12 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-hot-toast";
 import tw from "twin.macro";
-import Poster from "../../assets/poster.jpg";
+import { deleteWatchlist as deleteWatchlistApi } from "../../services/ApiAuth";
 
 const Card = tw.div`
 bg-white
 
-h-36
+h-max
 lg:w-80
 
 rounded-xl
@@ -68,21 +70,42 @@ rounded-md
 
 `;
 
-function MovieItem() {
+function MovieItem({ Poster, title, year, rating, genre, id }) {
+  const queryClient = useQueryClient();
+
+  const { mutate: deleteWatchlistMu, isLoading } = useMutation({
+    mutationFn: deleteWatchlistApi,
+    mutationKey: ["watchlist"],
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["watchlist"] });
+      toast.success("Movie deleted successfully");
+    },
+  });
+
+  function handleClick(id) {
+    deleteWatchlistMu(id);
+  }
+
   return (
     <Card className="">
       <Grid>
         <Image src={Poster} alt="Movie poster" />
         <div className="col-span-2 flex flex-col gap-2 divide-y divide-amber-500">
-          <MovieName>Freedom (2014)</MovieName>
-          <Rating>imdbRating: 5.7/10</Rating>
-          <Genre>Drama, Music</Genre>
+          <MovieName>
+            {title} ({year})
+          </MovieName>
+          <Rating>imdbRating: {rating}/10</Rating>
+          <Genre>{genre}</Genre>
 
           <div className="flex items-center justify-end gap-2 p-1">
             <WatchedButton className="transition-all active:scale-95">
               Watched
             </WatchedButton>
-            <DeleteButton className="transition-all active:scale-95">
+            <DeleteButton
+              onClick={() => handleClick(id)}
+              className="transition-all active:scale-95"
+            >
               Delete
             </DeleteButton>
           </div>

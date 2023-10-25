@@ -43,7 +43,7 @@ const StyledHeader = tw.h1`
   
 `;
 
-function Watchlist() {
+function WatchlistPage() {
   return (
     <div>
       <SearchContainer>
@@ -58,4 +58,4 @@ function Watchlist() {
   );
 }
 
-export default Watchlist;
+export default WatchlistPage;

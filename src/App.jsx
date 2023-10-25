@@ -8,7 +8,7 @@ import HomePage from "./pages/HomePage";
 import LandingPage from "./pages/LandingPage";
 import MoviePage from "./pages/MoviePage";
 import SearchPage from "./pages/SearchPage";
-import Watchlist from "./pages/Watchlist";
+import WatchlistPage from "./pages/WatchlistPage";
 import AppLayout from "./ui/AppLayout";
 import ProtectedRoute from "./ui/ProtectedRoute";
 
@@ -39,7 +39,7 @@ export default function App() {
             <Route path="/home" element={<HomePage />} />
             <Route path="/movie" element={<MoviePage />} />
             <Route path="/movie/:id" element={<MoviePage />} />
-            <Route path="/watchlist" element={<Watchlist />} />
+            <Route path="/watchlist" element={<WatchlistPage />} />
             <Route path="/search" element={<SearchPage />} />
             <Route path="/account" element={<Account />} />
           </Route>
