@@ -60,9 +60,9 @@ export async function getWatchlist() {
 
   // get the data from the api
   const { data, error } = await supabase
-    .from("watchlist")
+    .from("profile")
     .select("imdbID")
-    .eq("user_id", currentUserID);
+    .eq("id", currentUserID);
 
   if (error) throw new Error(error.message);
 
@@ -97,9 +97,9 @@ export async function deleteWatchlist(id) {
 
   //insert the data to the database
   const { data, error } = await supabase
-    .from("watchlist")
+    .from("profile")
     .update({ imdbID: filteredWatchlist })
-    .eq("user_id", currentUserID)
+    .eq("id", currentUserID)
     .select();
 
   console.log("data: ", data);
@@ -129,9 +129,9 @@ export async function addWatchlist(id) {
 
   //insert the data to the database
   const { data, error } = await supabase
-    .from("watchlist")
+    .from("profile")
     .update({ imdbID: newStringWatchlist })
-    .eq("user_id", currentUserID)
+    .eq("id", currentUserID)
     .select();
 
   console.log("data: ", data);

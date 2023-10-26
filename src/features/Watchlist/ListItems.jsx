@@ -4,7 +4,7 @@ import MovieItem from "./MovieItem";
 import { useWatchlist } from "./useWatchlist";
 
 function ListItems() {
-  const { data: watchlist = [""], isLoading } = useWatchlist();
+  const { data: watchlist = [], isLoading } = useWatchlist();
 
   const queryResult = useQueries({
     queries: watchlist.map((q) => {
@@ -18,25 +18,31 @@ function ListItems() {
     }),
   });
 
+  if (watchlist.length === 0)
+    return <TbFidgetSpinner size={50} className="m-auto animate-spin" />;
+
   if (
     queryResult.at(-1).isLoading === true ||
+    queryResult.at(-1).data?.Response === "false" ||
     queryResult.at(-1).isFetched === false
   )
     return <TbFidgetSpinner size={50} className="m-auto animate-spin" />;
 
   return (
     <>
-      {queryResult?.map((q) => (
-        <MovieItem
-          Poster={q.data?.Poster}
-          title={q.data?.Title}
-          year={q.data?.Year}
-          rating={q.data?.imdbRating}
-          genre={q.data?.Genre}
-          id={q.data?.imdbID}
-          key={q.data?.imdbID}
-        />
-      ))}
+      {queryResult?.map((q) => {
+        return (
+          <MovieItem
+            Poster={q.data?.Poster}
+            title={q.data?.Title}
+            year={q.data?.Year}
+            rating={q.data?.imdbRating}
+            genre={q.data?.Genre}
+            id={q.data?.imdbID}
+            key={q.data?.imdbID}
+          />
+        );
+      })}
     </>
   );
 }
