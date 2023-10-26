@@ -29,7 +29,7 @@ bg-neutral-200
 shadow-2xl
 rounded-2xl
 
-md:items-start
+items-start
 items-center
 
 //cheap trick
@@ -54,7 +54,7 @@ function Account() {
     <AccountContainer>
       <Box>
         <StyledHeading>Account Details</StyledHeading>
-        <p className="rounded-md bg-amber-400 p-2 font-bold text-red-600">
+        <p className="rounded-md bg-amber-400 p-2 font-bold text-red-600 md:text-2xl">
           This feature is under development, so it's NOT working
         </p>
         <UpdateUser />
