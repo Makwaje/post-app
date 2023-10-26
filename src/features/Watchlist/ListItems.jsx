@@ -4,7 +4,7 @@ import MovieItem from "./MovieItem";
 import { useWatchlist } from "./useWatchlist";
 
 function ListItems() {
-  const { data: watchlist = [], isLoading } = useWatchlist();
+  const { data: watchlist = [null], isLoading } = useWatchlist();
 
   const queryResult = useQueries({
     queries: watchlist.map((q) => {
@@ -31,6 +31,9 @@ function ListItems() {
   return (
     <>
       {queryResult?.map((q) => {
+        if (q.data.Response === "False") {
+          return null;
+        }
         return (
           <MovieItem
             Poster={q.data?.Poster}
