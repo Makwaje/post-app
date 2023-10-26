@@ -54,6 +54,9 @@ function Account() {
     <AccountContainer>
       <Box>
         <StyledHeading>Account Details</StyledHeading>
+        <p className="rounded-md bg-amber-400 p-2 font-bold text-red-600">
+          This feature is under development, so it's NOT working
+        </p>
         <UpdateUser />
       </Box>
     </AccountContainer>

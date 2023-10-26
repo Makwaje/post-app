@@ -118,7 +118,6 @@ function MovieDetails() {
     },
   });
   const isAddedToWatchlist = watchlist.includes(id);
-  console.log(isAddedToWatchlist);
 
   function handleClick(id) {
     if (isAddedToWatchlist === true) {

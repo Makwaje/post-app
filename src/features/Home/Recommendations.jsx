@@ -48,7 +48,7 @@ function Recommendations() {
           rating={q.data?.imdbRating}
           genre={q.data?.Genre}
           id={q.data?.imdbID}
-          key={q.data?.imdbID}
+          key={q.data?.imdbID || Math.random()}
         />
       ))}
     </>
