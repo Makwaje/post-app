@@ -6,8 +6,10 @@ import { deleteWatchlist as deleteWatchlistApi } from "../../services/ApiAuth";
 const Card = tw.div`
 bg-white
 
-h-max
+h-56
 lg:w-80
+
+
 
 rounded-xl
 p-2.5
@@ -47,26 +49,16 @@ const Grid = tw.div`
   grid-cols-3
 `;
 
-const WatchedButton = tw.button`
-bg-amber-500
-
-font-medium
-text-sm
-
-px-2.5
-py-0.5
-rounded-md
-`;
-
 const DeleteButton = tw.button`
 bg-red-500
 text-neutral-50
 font-medium
 text-sm
-
-px-2.5
-py-0.5
+px-6
+py-2.5
 rounded-md
+
+mt-2
 
 `;
 
@@ -97,20 +89,16 @@ function MovieItem({ Poster, title, year, rating, genre, id }) {
           </MovieName>
           <Rating>imdbRating: {rating}/10</Rating>
           <Genre>{genre}</Genre>
-
-          <div className="flex items-center justify-end gap-2 p-1">
-            <WatchedButton className="transition-all active:scale-95">
-              Watched
-            </WatchedButton>
-            <DeleteButton
-              onClick={() => handleClick(id)}
-              className="transition-all active:scale-95"
-            >
-              Delete
-            </DeleteButton>
-          </div>
         </div>
       </Grid>
+      <div className="flex flex-col items-end justify-end">
+        <DeleteButton
+          onClick={() => handleClick(id)}
+          className="transition-all hover:bg-red-600 active:scale-95"
+        >
+          Delete
+        </DeleteButton>
+      </div>
     </Card>
   );
 }

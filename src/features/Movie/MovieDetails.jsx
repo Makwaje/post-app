@@ -4,7 +4,7 @@ import { HiEye, HiMiniCheckCircle } from "react-icons/hi2";
 import { TbFidgetSpinner } from "react-icons/tb";
 import { useParams } from "react-router-dom";
 import tw from "twin.macro";
-import { addWatchlist } from "../../services/ApiAuth";
+import { addWatchlist, deleteWatchlist } from "../../services/ApiAuth";
 import { getMovie } from "../../services/MoviesApi";
 import { useWatchlist } from "../Watchlist/useWatchlist";
 
@@ -108,12 +108,26 @@ function MovieDetails() {
     },
   });
 
+  const { mutate: deleteWatchlistMu, isLoading: isDeleting } = useMutation({
+    mutationFn: deleteWatchlist,
+    mutationKey: ["watchlist"],
+
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+      toast.success("Movie removed successfully");
+    },
+  });
+  const isAddedToWatchlist = watchlist.includes(id);
+  console.log(isAddedToWatchlist);
+
   function handleClick(id) {
+    if (isAddedToWatchlist === true) {
+      deleteWatchlistMu(id);
+      return;
+    }
     addMovie(id);
   }
 
-  const isAddedToWatchlist = watchlist.includes(id);
-  console.log(isAddedToWatchlist);
   return (
     <>
       {isLoading && (
@@ -148,17 +162,26 @@ function MovieDetails() {
           <button
             onClick={() => handleClick(id)}
             disabled={isLoading}
-            className="rounded-md bg-amber-500 p-2"
+            className={`rounded-md bg-amber-500 p-2 duration-200 ${
+              isAddedToWatchlist ? "hover:bg-red-600 hover:text-red-100" : ""
+            }`}
           >
             <Flex>
-              {isAdding ? (
+              {isAdding || isDeleting ? (
                 <TbFidgetSpinner size={50} className="m-auto animate-spin" />
               ) : isAddedToWatchlist ? (
-                <HiMiniCheckCircle size={48} />
+                <HiMiniCheckCircle
+                  size={48}
+                  className={`${isAddedToWatchlist ? "text-green-700" : ""}`}
+                />
               ) : (
                 <HiEye size={48} />
               )}
-              <HeadingStyle>Add to watchlist</HeadingStyle>
+              <HeadingStyle>
+                {isAddedToWatchlist
+                  ? "Remove from watchlist"
+                  : "Add to watchlist"}
+              </HeadingStyle>
             </Flex>
           </button>
         </Flex>

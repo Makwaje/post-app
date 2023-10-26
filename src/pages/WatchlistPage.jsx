@@ -1,7 +1,7 @@
 import tw from "twin.macro";
 import ListItems from "../features/Watchlist/ListItems";
 
-const SearchContainer = tw.div`
+const WatchlistContainer = tw.div`
 min-w-full
 mx-auto
 h-screen
@@ -43,17 +43,38 @@ const StyledHeader = tw.h1`
   
 `;
 
+const Grid = tw.div`
+grid
+
+grid-cols-1
+sm:grid-cols-2
+lg:grid-cols-3
+
+
+
+
+gap-y-8
+gap-x-6
+
+
+items-center
+justify-center
+self-center
+
+`;
 function WatchlistPage() {
   return (
     <div>
-      <SearchContainer>
+      <WatchlistContainer>
         <Box>
           <StyledHeader>Watchlist Movies</StyledHeader>
           <Flex>
-            <ListItems />
+            <Grid>
+              <ListItems />
+            </Grid>
           </Flex>
         </Box>
-      </SearchContainer>
+      </WatchlistContainer>
     </div>
   );
 }

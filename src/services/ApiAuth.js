@@ -140,3 +140,31 @@ export async function addWatchlist(id) {
 
   return data;
 }
+
+export async function pushObject(id) {
+  //get user watch list from database
+  const userWatchlist = await getUserWatchlist();
+  console.log(userWatchlist);
+
+  //get userID
+  const { data: user } = await supabase.auth.getUser();
+  const currentUserID = user?.user.id;
+  console.log(currentUserID);
+
+  // add id to the watchlist (array)
+  userWatchlist.push(id);
+  console.log(userWatchlist);
+
+  //insert the data to the database
+  const { data, error } = await supabase
+    .from("profile")
+    .update({ obj_test: userWatchlist })
+    .eq("id", currentUserID)
+    .select();
+
+  console.log("data: ", data);
+
+  if (error) throw new Error(error.message);
+
+  return data;
+}
