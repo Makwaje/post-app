@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { TbFidgetSpinner } from "react-icons/tb";
+import { TbEye, TbEyeClosed, TbFidgetSpinner } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import tw from "twin.macro";
 import { useLogin } from "./useLogin";
@@ -80,6 +81,7 @@ border-amber-500
 function LoginAuth() {
   const navigate = useNavigate();
   const { login, isLoading } = useLogin();
+  const [isHidden, setIsHidden] = useState(true);
 
   const {
     register,
@@ -104,19 +106,30 @@ function LoginAuth() {
           />
 
           {errors.email && <Alert role="alert">{errors.email.message}</Alert>}
-
-          <Input
-            placeholder="Password"
-            type="password"
-            {...register("password", {
-              required: "password is required",
-              minLength: {
-                value: 6,
-                message: "password must be (6 characters) or more",
-              },
-            })}
-            disabled={isLoading}
-          />
+          <div className="flex items-center justify-between">
+            <Input
+              placeholder="Password"
+              type={isHidden ? "password" : "text"}
+              {...register("password", {
+                required: "password is required",
+                minLength: {
+                  value: 6,
+                  message: "password must be (6 characters) or more",
+                },
+              })}
+              disabled={isLoading}
+            />
+            <span
+              className="absolute right-24"
+              onClick={() => setIsHidden((hidden) => !hidden)}
+            >
+              {!isHidden ? (
+                <TbEye size={34} className=" text-neutral-600" />
+              ) : (
+                <TbEyeClosed size={34} className="text-neutral-600" />
+              )}
+            </span>
+          </div>
           {errors.password && (
             <Alert role="alert">{errors.password.message}</Alert>
           )}

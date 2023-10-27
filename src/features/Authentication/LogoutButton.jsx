@@ -10,6 +10,13 @@ justify-center
 p-1
 `;
 
+const modal = tw.div`
+w-60
+h-80
+
+bg-red-500
+`;
+
 function LogoutButton() {
   const { logout } = useLogout();
 

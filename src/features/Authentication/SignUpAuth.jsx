@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { TbFidgetSpinner } from "react-icons/tb";
+import { TbEye, TbEyeClosed, TbFidgetSpinner } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import tw from "twin.macro";
 import { useSignUp } from "./useSignUp";
@@ -81,6 +82,8 @@ function SignUpAuth() {
 
   const { signUp, isLoading } = useSignUp();
 
+  const [isHidden, setIsHidden] = useState(true);
+
   const {
     register,
     handleSubmit,
@@ -112,24 +115,37 @@ function SignUpAuth() {
           />
           {errors.email && <Alert role="alert">{errors.email.message}</Alert>}
 
-          <Input
-            placeholder="Enter your password"
-            type="password"
-            {...register("password", {
-              required: "password is required",
-              minLength: {
-                value: 6,
-                message: "password must be (6 characters) or more",
-              },
-            })}
-          />
+          <div className="flex items-center justify-between">
+            <Input
+              placeholder="Password"
+              type={isHidden ? "password" : "text"}
+              {...register("password", {
+                required: "password is required",
+                minLength: {
+                  value: 6,
+                  message: "password must be (6 characters) or more",
+                },
+              })}
+              disabled={isLoading}
+            />
+            <span
+              className="absolute right-24"
+              onClick={() => setIsHidden((hidden) => !hidden)}
+            >
+              {!isHidden ? (
+                <TbEye size={34} className=" text-neutral-600" />
+              ) : (
+                <TbEyeClosed size={34} className="text-neutral-600" />
+              )}
+            </span>
+          </div>
           {errors.password && (
             <Alert role="alert">{errors.password.message}</Alert>
           )}
 
           <Input
             placeholder="Re-Enter your password"
-            type="password"
+            type={isHidden ? "password" : "text"}
             {...register("passwordConfirm", {
               required: "Please re-enter your password",
               validate: (value) =>
