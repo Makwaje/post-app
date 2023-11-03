@@ -9,17 +9,7 @@ export async function getPosts() {
 }
 
 export async function CreatePost(postData) {
-  // post with no img
-  if (postData.img.length === 0) {
-    const { data, error } = await supabase.from("posts").insert([
-      {
-        username: postData.user,
-        post: postData.post,
-        images: [],
-        anon: postData.isAnon,
-      },
-    ]);
-  }
+  console.log(postData.img.length);
 
   if (postData.img.length > 0) {
     // upload the image
@@ -45,5 +35,17 @@ export async function CreatePost(postData) {
     ]);
 
     if (error) throw new Error(error.message);
+  }
+
+  // post with no img
+  if (postData.img.length === 0) {
+    const { data, error } = await supabase.from("posts").insert([
+      {
+        username: postData.user,
+        post: postData.post,
+        images: [],
+        anon: postData.isAnon,
+      },
+    ]);
   }
 }
