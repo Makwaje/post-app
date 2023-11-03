@@ -20,8 +20,7 @@ function CreateForm() {
 
     console.log(newFormData);
 
-    createPost(newFormData);
-    reset();
+    createPost(newFormData, { onSettled: () => reset() });
   }
 
   return (
