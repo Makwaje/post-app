@@ -2,13 +2,15 @@ import { LucideImagePlus } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useUser } from "../../contexts/UserContext";
-import { CreatePost } from "../../services/postsApi";
+import { useCreatePost } from "./useCreatePost";
 
 function CreateForm() {
   const [isAnonymous, setIsAnonymous] = useState(false);
 
   const { register, reset, handleSubmit } = useForm();
   const { user } = useUser();
+
+  const { createPost, isLoading } = useCreatePost();
 
   function onSubmit(formData) {
     if (!formData.img.length && !formData.post)
@@ -18,7 +20,7 @@ function CreateForm() {
 
     console.log(newFormData);
 
-    CreatePost(newFormData);
+    createPost(newFormData);
     reset();
   }
 
@@ -60,7 +62,11 @@ function CreateForm() {
         </label>
         <br />
         <button type="submit" className="btn btn-primary mx-auto w-fit px-6">
-          Post
+          {isLoading ? (
+            <span className="loading loading-dots loading-md"></span>
+          ) : (
+            "post"
+          )}
         </button>
       </div>
     </form>
