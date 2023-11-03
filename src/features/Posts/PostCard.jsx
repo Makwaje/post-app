@@ -44,10 +44,7 @@ function PostCard({ username, postText = "", img = [""], isAnon }) {
         </UsernameContainer>
         <div className="divider mt-0 "></div>
 
-        {/* <PostText>{postText}</PostText> */}
-        <PostText>
-          dsfakjsdhfjkalsdhfjkadshfjkasdhfjklahdskjfhasdjkfhasdljhfaljsdhfjakdhsfjkahdsjflhadsljhfljasdhfajkdshfjkadhsfjkha
-        </PostText>
+        <PostText>{postText}</PostText>
 
         <div className="divider mt-0"></div>
         {img[0] === "" ? null : <Images imgs={img} />}
