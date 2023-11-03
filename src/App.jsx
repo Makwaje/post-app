@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import AuthPage from "./pages/AuthPage";
@@ -21,6 +22,7 @@ function App() {
           <Route path="/login" element={<AuthPage />} />
           <Route path="/*" element={<AuthPage />} />
         </Routes>
+        <Toaster />
       </BrowserRouter>
     </>
   );
