@@ -1,18 +1,25 @@
 import { LucideImagePlus } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useUser } from "../../contexts/UserContext";
+import { CreatePost } from "../../services/postsApi";
 
 function CreateForm() {
   const [isAnonymous, setIsAnonymous] = useState(false);
 
   const { register, reset, handleSubmit } = useForm();
+  const { user } = useUser();
 
   function onSubmit(formData) {
     if (!formData.img.length && !formData.post)
       alert("You idiot! \n can't post noting");
 
-    console.log(formData);
-    // reset();
+    const newFormData = { ...formData, user };
+
+    console.log(newFormData);
+
+    CreatePost(newFormData);
+    reset();
   }
 
   return (
@@ -35,6 +42,7 @@ function CreateForm() {
             <span className="label-text font-semibold">Upload a photo</span>
           </div>
         </label>
+        <span className="text-danger label-text mb-2 text-xs font-bold text-red-500">{`[Currently you're allowed to upload only ONE photo]`}</span>
         <input
           {...register("img")}
           type="file"
